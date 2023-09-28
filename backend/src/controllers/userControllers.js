@@ -56,7 +56,7 @@ const addOneUser = (req, res) => {
   models.user
     .insert(user)
     .then(([result]) => {
-      res.sendStatus(201);
+      res.status(201).send(result);
     })
     .catch((err) => {
       console.error(err);

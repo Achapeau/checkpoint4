@@ -75,8 +75,6 @@ const editOneItem = (req, res) => {
 const addOneItem = (req, res) => {
   const item = req.body;
 
-  console.log(item);
-
   models.item
     .insert(item)
     .then(([result]) => {
