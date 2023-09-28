@@ -1,6 +1,6 @@
 const models = require("../models");
 
-const browse = (req, res) => {
+const browseAllItem = (req, res) => {
   models.item
     .findAll()
     .then(([rows]) => {
@@ -12,7 +12,7 @@ const browse = (req, res) => {
     });
 };
 
-const read = (req, res) => {
+const readOneItem = (req, res) => {
   models.item
     .find(req.params.id)
     .then(([rows]) => {
@@ -28,7 +28,29 @@ const read = (req, res) => {
     });
 };
 
-const edit = (req, res) => {
+const editOneItemByAdmin = (req, res) => {
+  const item = req.body;
+
+  // TODO validations (length, format...)
+
+  item.id = parseInt(req.params.id, 10);
+
+  models.item
+    .updateByAdmin(item)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const editOneItem = (req, res) => {
   const item = req.body;
 
   // TODO validations (length, format...)
@@ -50,15 +72,15 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const addOneItem = (req, res) => {
   const item = req.body;
 
-  // TODO validations (length, format...)
+  console.log(item);
 
   models.item
     .insert(item)
     .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+      res.status(201).send(result);
     })
     .catch((err) => {
       console.error(err);
@@ -66,7 +88,7 @@ const add = (req, res) => {
     });
 };
 
-const destroy = (req, res) => {
+const destroyOneItem = (req, res) => {
   models.item
     .delete(req.params.id)
     .then(([result]) => {
@@ -83,9 +105,10 @@ const destroy = (req, res) => {
 };
 
 module.exports = {
-  browse,
-  read,
-  edit,
-  add,
-  destroy,
+  browseAllItem,
+  readOneItem,
+  editOneItem,
+  addOneItem,
+  destroyOneItem,
+  editOneItemByAdmin,
 };

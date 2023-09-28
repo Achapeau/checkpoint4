@@ -1,13 +1,13 @@
-import Home from "./pages/Home";
+import { BrowserRouter } from "react-router-dom";
 
-import "./App.css";
+import "./Index.css";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-      <p>coucou</p>
-    </div>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 
