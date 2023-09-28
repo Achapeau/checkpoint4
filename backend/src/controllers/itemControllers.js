@@ -1,105 +1,85 @@
 const models = require("../models");
 
-const browseAllItem = (req, res) => {
-  models.item
-    .findAll()
-    .then(([rows]) => {
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+const browseAllItem = async (req, res) => {
+  const all = await models.item.findAll();
+  try {
+    res.send(all);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
-const readOneItem = (req, res) => {
-  models.item
-    .find(req.params.id)
-    .then(([rows]) => {
-      if (rows[0] == null) {
-        res.sendStatus(404);
-      } else {
-        res.send(rows[0]);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+const readOneItem = async (req, res) => {
+  const one = await models.item.find(req.params.id);
+
+  try {
+    if (one[0] == null) {
+      res.sendStatus(404);
+    } else {
+      res.send(one[0]);
+    }
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
-const editOneItemByAdmin = (req, res) => {
+const editOneItemByAdmin = async (req, res) => {
   const item = req.body;
-
-  // TODO validations (length, format...)
-
   item.id = parseInt(req.params.id, 10);
-
-  models.item
-    .updateByAdmin(item)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  const one = await models.item.updateByAdmin(item);
+  try {
+    if (one.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
-const editOneItem = (req, res) => {
+const editOneItem = async (req, res) => {
   const item = req.body;
-
-  // TODO validations (length, format...)
-
   item.id = parseInt(req.params.id, 10);
-
-  models.item
-    .update(item)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  const one = await models.item.update(item);
+  try {
+    if (one.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
-const addOneItem = (req, res) => {
+const addOneItem = async (req, res) => {
   const item = req.body;
-
-  models.item
-    .insert(item)
-    .then(([result]) => {
-      res.status(201).send(result);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+  const added = await models.item.insert(item);
+  try {
+    res.status(201).send(added);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
-const destroyOneItem = (req, res) => {
-  models.item
-    .delete(req.params.id)
-    .then(([result]) => {
-      if (result.affectedRows === 0) {
-        res.sendStatus(404);
-      } else {
-        res.sendStatus(204);
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+const destroyOneItem = async (req, res) => {
+  const itemSup = await models.item.delete(req.params.id);
+  try {
+    if (itemSup.affectedRows === 0) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
 };
 
 module.exports = {
