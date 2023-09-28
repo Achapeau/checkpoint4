@@ -11,10 +11,10 @@
 }
 
 @font-face {
-  font-family: Roboto Slab;
+  font-family: Noto sans JP;
 
-  src: local("RobotoSlab-Regular")
-    url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap");
+  src: local("NotoSansJP")
+    url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&family=Righteous&display=swap");
 }
 
 html,
