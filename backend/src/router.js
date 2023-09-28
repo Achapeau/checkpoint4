@@ -2,6 +2,29 @@ const express = require("express");
 
 const router = express.Router();
 
+const authorization = require("./middlewares/authorization");
+const {
+  checkUserExists,
+  checkUserDoesntExists,
+} = require("./middlewares/checkUser");
+const {
+  signIn,
+  signUp,
+  logout,
+} = require("./controllers/connexionControllers");
+const validateConnexion = require("./middlewares/connexion.validate");
+const validateInscription = require("./middlewares/inscription.validate");
+const hashPassword = require("./middlewares/hashPassword");
+
+router.post("/signin", validateConnexion, checkUserExists, signIn);
+router.post(
+  "/signup",
+  validateInscription,
+  checkUserDoesntExists,
+  hashPassword,
+  signUp
+);
+
 const itemControllers = require("./controllers/itemControllers");
 
 router.get("/items", itemControllers.browseAllItem);
