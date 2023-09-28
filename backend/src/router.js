@@ -2,7 +2,6 @@ const express = require("express");
 
 const router = express.Router();
 
-const authorization = require("./middlewares/authorization");
 const {
   checkUserExists,
   checkUserDoesntExists,
@@ -44,6 +43,7 @@ router.delete("/baskets/:id", basketControllers.destroyOneBasket);
 
 const userControllers = require("./controllers/userControllers");
 
+router.get("/logout", logout);
 router.get("/user", userControllers.browseAllUser);
 router.get("/user/:id", userControllers.readOneUser);
 router.put("/user/:id", userControllers.editOneUser);

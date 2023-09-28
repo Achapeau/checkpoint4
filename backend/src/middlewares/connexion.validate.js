@@ -1,4 +1,4 @@
-const schemaConnexion = require("../validators/connexion.validator.js");
+const schemaConnexion = require("../validators/connexion.validator");
 
 const validateConnexion = (req, res, next) => {
   const connexionForm = req.body;
