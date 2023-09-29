@@ -1,7 +1,7 @@
 const models = require("../models");
 
 const browseAllItem = async (req, res) => {
-  const all = await models.item.findAll();
+  const [all] = await models.item.findAll();
   try {
     res.send(all);
   } catch (err) {

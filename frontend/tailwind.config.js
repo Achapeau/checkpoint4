@@ -8,7 +8,7 @@ module.exports = {
         french: ["Roboto", "sans-serif"],
       },
       colors: {
-        primary: "#E5E9E7", // WHITE
+        primary: "#F1F1F1", // WHITE
         secondary: "#525B5A", // BLACK
       },
       backgroundImage: {
