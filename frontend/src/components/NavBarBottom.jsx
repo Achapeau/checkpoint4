@@ -4,10 +4,11 @@ import { useCurrentUserContext } from "../context/CurrentUserContext";
 import expressApi from "../services/expressApi";
 
 function NavBarBottom({ toggleModalConnexion }) {
-  const { user } = useCurrentUserContext();
+  const { user, setUser } = useCurrentUserContext();
   const navigate = useNavigate();
   const handleConnexionClick = () => {
     if (user) {
+      setUser(null);
       expressApi("/logout");
     } else {
       toggleModalConnexion();
