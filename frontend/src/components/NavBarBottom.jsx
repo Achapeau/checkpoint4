@@ -9,7 +9,6 @@ function NavBarBottom({ toggleModalConnexion }) {
   const handleConnexionClick = () => {
     if (user) {
       expressApi("/logout");
-      localStorage.removeItem();
     } else {
       toggleModalConnexion();
     }

@@ -188,7 +188,7 @@ function ModalInscription({ toggleModalInscritpion, toggleModalConnexion }) {
                 name="password"
                 placeholder="Entrez votre mot de passe"
                 value={formDataInscription.password}
-                onChange={handleChange}
+                // onChange={handleChange}
                 required
               />
             </div>

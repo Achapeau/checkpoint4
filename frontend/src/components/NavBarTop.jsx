@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { useCurrentUserContext } from "../context/CurrentUserContext";
 
 function NavBarTop({ toggleModalConnexion }) {
-  const { user } = useCurrentUserContext();
+  const { user, setUser } = useCurrentUserContext();
   const navigate = useNavigate();
-
   const handleConnexionClick = () => {
     if (user) {
+      setUser(null);
       navigate("/");
     } else {
       toggleModalConnexion();
